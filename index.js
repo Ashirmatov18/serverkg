@@ -6,17 +6,21 @@ import multer from "multer";
 import fileUpload from "express-fileupload";
 import path from "path";
 import crypto from "crypto";
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 const app = express();
 // const port = 8000;
 const db = mysql.createPool({
-  host: "35.184.135.87", 
-  user: 'root', 
-  password: 'kgtradingkg',
-  database: 'car_db',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
   waitForConnections: true,
   queueLimit: 0
 });
+
 
 db.getConnection((err, conn) => {
   if(err) console.log(err)
